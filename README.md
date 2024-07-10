@@ -1,5 +1,1 @@
-testing pull new main branch into my branch and pushing back -- josh
-
-Adding joshs jupyter notebook
-Adding miguels jupyter notebook
-Adding davids jupyter notebook
+A project containing the second protfolio project for Miami FinTech Bootcamp, a collaboration between Josh Bazzano, Miquel Suarez, David Kratzer, and Chad Sanon 
