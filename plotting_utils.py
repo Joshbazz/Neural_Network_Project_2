@@ -6,7 +6,7 @@ import pandas as pd
 import tensorflow as tf
 from sklearn.decomposition import PCA
 from tensorflow.keras.utils import plot_model
-from IPython.display import Image, display
+# from IPython.display import Image, display
 
 def plot_loss_training_history(history):
     plt.figure(figsize=(12, 6))
