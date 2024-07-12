@@ -17,7 +17,7 @@ class ModelEvaluator:
         self.y_test_inversed = None
 
         if not self.model and model_path:
-            self.load_saved_model(model_path)    
+            self.load_saved_model(model_path)     
     
     def load_saved_model(self, model_path):
         self.model = load_model(model_path)

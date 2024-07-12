@@ -13,11 +13,27 @@ from ModelEvaluator import ModelEvaluator
 
 
 class LSTMModel:
-    def __init__(self, model_path=None, data_path=None, lags=5, test_size=.25, learning_rate = 0.001, epochs=50, batch_size=32, validation_split=0.2, plot=True):
+    def __init__(self, 
+                 model_path=None, 
+                 data_path=None, 
+                 lags=5, 
+                 test_size=.25, 
+                 lstm_neurons=150, 
+                 dropout_rate=.50, 
+                 dense_neurons = 20,
+                 learning_rate = 0.001, 
+                 epochs=50, 
+                 batch_size=32, 
+                 validation_split=0.2, 
+                 plot=True):
+        
         self.model = None
         self.model_path = model_path
         self.history = None
         self.data_path = data_path
+        self.lstm_neurons = lstm_neurons
+        self.dropout_rate = dropout_rate
+        self.dense_neurons = dense_neurons
         self.lag_features = ['value', 'Close'] # change these if you want to calculate lags on different feature columns
         self.target_col = 'Close' # change this if you want to target a different variable than Close
         self.X_scaler = RobustScaler()
@@ -71,9 +87,9 @@ class LSTMModel:
 
         model = Sequential()
         model.add(Input(shape=(timesteps, features)))
-        model.add(LSTM(150, return_sequences=False))
-        model.add(Dropout(0.50)) # Dropout Regularization
-        model.add(Dense(20, activation='relu'))
+        model.add(LSTM(self.lstm_neurons, return_sequences=False))
+        model.add(Dropout(self.dropout_rate)) # Dropout Regularization
+        model.add(Dense(self.dense_neurons, activation='relu'))
         model.add(Dense(1))  # No activation for regression
         model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss=self.loss, metrics=self.metrics)
         model.summary()
@@ -136,12 +152,12 @@ class LSTMModel:
         self.backtest_signals()
 
 
-model = LSTMModel(test_size=0.25, 
-                  learning_rate=0.001, 
-                  epochs=50, 
-                  batch_size=32, 
-                  validation_split=0.25, 
-                  plot=True)
+# model = LSTMModel(test_size=0.25, 
+#                   learning_rate=0.001, 
+#                   epochs=50, 
+#                   batch_size=32, 
+#                   validation_split=0.25, 
+#                   plot=True)
 
-model.run_and_train()
+# model.run_and_train()
 
