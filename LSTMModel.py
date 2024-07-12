@@ -94,7 +94,7 @@ class LSTMModel:
         model.compile(optimizer=Adam(learning_rate=self.learning_rate), loss=self.loss, metrics=self.metrics)
         model.summary()
         self.model = model
-        # save_and_visualize_model(self.model)
+        save_and_visualize_model(self.model)
 
     def train_model(self):
         self.history = self.model.fit(
